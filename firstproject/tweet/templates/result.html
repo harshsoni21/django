@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Tweet Confirm
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Tweet Search Results</h1>
+
+{% for tweet in tweets %}
+<p>{{tweet.text}}</p>
+  {% if searched_value in tweet.text %}
+  <div class="card" style="width: 18rem; margin-bottom: 20px;">
+    <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet image" />
+    <div class="card-body">
+      <h5 class="card-title">{{ tweet.user.username }}</h5>
+      <p class="card-text">{{ tweet.text }}</p>
+      {% if tweet.user == user %}
+      <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <h2>No Such Result Found like {{searched_value}}</h2>
+  {% endif %}
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Tweet Confirm{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Tweet Page</h1>
+<h2>{% if form.instance.pk %} Edit Tweet {% else %} Create New Tweet {% endif %}</h2>
+<form method="post" enctype="multipart/form-data" style="width: 50%;">
+    {% csrf_token %}
+{{tweet_form.as_p}}
+{{tweet_info_form.as_p}}
+<button class="btn btn-warning" type = "submit">
+    Submit 
+</button>
+</form>
+<a href="{% url 'tweet_list' %}">Back To Tweet list</a>
+{% endblock %}
